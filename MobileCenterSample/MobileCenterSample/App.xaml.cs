@@ -59,6 +59,9 @@ namespace MobileCenterSample
                 appSecret: $"ios={Const.Keys.MobileCenterSecretIos};" + $"android={Const.Keys.MobileCenterSecretAndroid};",
                 services: new[] { typeof(Analytics), typeof(Crashes) }
             );
+
+            // クラッシュのデータ収集を有効化する
+            Crashes.Enabled = true;
         }
 
         public static void GoToMainPage()

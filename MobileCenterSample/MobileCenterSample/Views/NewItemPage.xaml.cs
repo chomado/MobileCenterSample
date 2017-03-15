@@ -3,6 +3,9 @@
 using MobileCenterSample.Models;
 
 using Xamarin.Forms;
+using Microsoft.Azure.Mobile.Crashes;
+using Microsoft.Azure.Mobile.Analytics;
+using System.Collections.Generic;
 
 namespace MobileCenterSample.Views
 {
@@ -27,6 +30,12 @@ namespace MobileCenterSample.Views
         {
             MessagingCenter.Send(this, "AddItem", Item);
             await Navigation.PopToRootAsync();
+        }
+
+        async void Crash_Clicked(object sender, EventArgs e)
+        {
+            Analytics.TrackEvent(name: "NewItem_ Crash Clicked", properties: new Dictionary<string, string> { { "Category", "Crash" } });
+            Crashes.GenerateTestCrash();
         }
     }
 }

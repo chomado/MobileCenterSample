@@ -6,6 +6,12 @@ using MobileCenterSample.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+// -- Mobile Center
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
+// ---
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MobileCenterSample
 {
@@ -42,6 +48,17 @@ namespace MobileCenterSample
             {
                 GoToMainPage();
             }
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            // Mobile Center
+            MobileCenter.Start(
+                appSecret: $"ios={Const.Keys.MobileCenterSecretIos};" + $"android={Const.Keys.MobileCenterSecretAndroid}",
+                services: new[] { typeof(Analytics), typeof(Crashes) }
+            );
         }
 
         public static void GoToMainPage()

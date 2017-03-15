@@ -56,7 +56,7 @@ namespace MobileCenterSample
 
             // Mobile Center
             MobileCenter.Start(
-                appSecret: $"ios={Const.Keys.MobileCenterSecretIos};" + $"android={Const.Keys.MobileCenterSecretAndroid}",
+                appSecret: $"ios={Const.Keys.MobileCenterSecretIos};" + $"android={Const.Keys.MobileCenterSecretAndroid};",
                 services: new[] { typeof(Analytics), typeof(Crashes) }
             );
         }

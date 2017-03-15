@@ -7,6 +7,9 @@ using MobileCenterSample.Services;
 
 using Xamarin.Forms;
 
+using Microsoft.Azure.Mobile.Analytics;
+using System.Collections.Generic;
+
 namespace MobileCenterSample.ViewModels
 {
     public class LoginViewModel : BaseViewModel
@@ -14,7 +17,15 @@ namespace MobileCenterSample.ViewModels
         public LoginViewModel()
         {
             SignInCommand = new Command(async () => await SignIn());
-            NotNowCommand = new Command(App.GoToMainPage);
+            NotNowCommand = new Command(() => {
+                    Analytics.TrackEvent(
+                        name: "Login_ NotNow Clicked", 
+                        properties: new Dictionary<string, string> { { "Category", "Login" } }
+                    );
+
+                    App.GoToMainPage();
+                }
+            );
         }
 
         string message = string.Empty;
